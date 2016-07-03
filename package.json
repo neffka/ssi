@@ -1,5 +1,8 @@
 {
 	"name": "slither-clone-server",
+	"scripts": {
+		"start": "node index.js"
+	},
 	"version": "0.0.1",
 	"pkgDependencies": {},
 	"dependencies": {
