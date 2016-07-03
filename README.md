@@ -1,2 +1,0 @@
-# ssi
-Our internal project
