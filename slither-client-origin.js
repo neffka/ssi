@@ -1,5 +1,8 @@
 var testing = !1;
 0 <= window.location.href.indexOf("/testing") && (testing = !0);
+
+
+// определение платформы
 var lang = navigator.language || navigator.userLanguage,
 	lang = lang.substr(0, 2),
 	forcing = !1,
@@ -30,6 +33,9 @@ if (is_chrome)
 			break
 		}
 	}
+
+// настройка анимации
+
 var doiosh = !1,
 	a, j, k, l, m, n, o, r, fj, d, d2, qq, sc, agpu = "translateZ(0)",
 	ang, sang, vang;
@@ -69,6 +75,8 @@ var pi2 = 2 * Math.PI,
 		return f
 	};
 
+
+//настройка канваса
 function addCss(b) {
 	var f = document.createElement("style");
 	document.getElementsByTagName("head")[0].appendChild(f);
@@ -162,6 +170,8 @@ var mos = [],
 	whmos = !1,
 	swmup = !1;
 
+
+//формирование пнопочек
 function mkBtn(b, f, c, h) {
 	var u = document.createElement("div");
 	b.tagName || (b = document.getElementById(b), b.style.width = c + "px", b.style.height = h + "px", u.style.width = c + "px", u.style.height = h + "px");
@@ -407,6 +417,8 @@ var sos = [],
 	llgmtm = Date.now(),
 	login_iv = -1;
 
+
+//инпут для ника
 function loginFade() {
 	var b = Date.now(),
 		f = (b - llgmtm) / 25;
@@ -463,6 +475,8 @@ o.elem.onclick = function() {
 		dead_mtm = Date.now() - 5E3
 	}
 };
+
+// то, что мы видим перед игрой
 var nick = document.getElementById("nick"),
 	victory = document.getElementById("victory"),
 	victory_bg = document.getElementById("victory_bg"),
@@ -783,6 +797,9 @@ var flt_a = "ler did no;gas the;gas all;gas every;panis;panus;paynis;my ass;cut 
 	flt_g = "buttlov buttf smegm therplu eatmy suckm sucka chither entmpw chlther ch1ther erioorg eri0org erio0rg eri00rg erloorg erl0org erlo0rg erl00rg erioco lithere eriodo odskinpr therbot therb0t ragapw mydik urdik heriobo mistik ki11all agarbots rcomwith brazz iomods cunt suckdik slibot iogamep siibot garb0t herioha itherhac sucksdik sukdik deltaloves suksdik hitler assmunch lickmy fuqall fukall tobils yourmom yourmother muslimsare allmuslims themuslim jewsare alljews thejews hateblack lackpeop".split(" "),
 	flt_w = ["ass", "kkk"];
 
+
+
+/////////////////////////
 function gdnm(b) {
 	var f = "",
 		c = "",
@@ -853,7 +870,10 @@ function setMscps(b) {
 		for (b = 0; 2048 > b; b++) fmlts.push(f), fpsls.push(c)
 	}
 }
+///////////////////
 
+
+// начало игры
 function startShowGame() {
 	llgmtm = Date.now();
 	login_iv = setInterval(loginFade, 25);
@@ -864,6 +884,7 @@ function startShowGame() {
 	lb_fr = -1
 }
 
+// применение скина
 function setSkin(b, f) {
 	b.rcv = f;
 	b.er = 6;
@@ -1022,6 +1043,8 @@ function setSkin(b, f) {
 	b.cv = f
 }
 
+
+//новая змея
 function newSnake(b, f, c, h, u, q) {
 	var e = {};
 	e.id = b;
@@ -1111,6 +1134,8 @@ function snl(b) {
 	b == snake && (wumsts = !0)
 }
 
+
+//новая еда
 function newFood(b, f, c, h, u, q) {
 	var e = {};
 	e.id = b;
@@ -1214,6 +1239,8 @@ function newPrey(b, f, c, h, u, q, e, w, C) {
 	preys.push(x);
 	return x
 }
+
+//работа с канвасом
 var ecmc = document.createElement("canvas");
 ecmc.width = ecmc.height = 48;
 ctx = ecmc.getContext("2d");
@@ -1620,6 +1647,9 @@ social.width = 251;
 social.height = 150;
 social.src = "/social-box/";
 document.body.appendChild(social);
+
+
+// отрисовка действий в канвасе
 for (var oef = function() {
 		whmos && hmos();
 		var b = Date.now();
@@ -2240,6 +2270,7 @@ var dfs = s,
 	lhh = 0,
 	csc, grd = 16384;
 
+// ресайз окна
 function resize() {
 	ww = Math.ceil(window.innerWidth);
 	hh = Math.ceil(window.innerHeight);
@@ -2374,6 +2405,7 @@ for (var pf_add = 0, pf_new_add = 0, pf_remove = 0, tpfa = new Float32Array(4E4)
 var pfd;
 testing && (pfd = document.createElement("div"), pfd.style.position = "fixed", pfd.style.left = "4px", pfd.style.bottom = "69px", pfd.style.width = "170px", pfd.style.height = "364px", pfd.style.background = "rgba(0, 0, 0, .8)", pfd.style.color = "#80FF80", pfd.style.fontFamily = "Verdana", pfd.style.zIndex = 999999, pfd.style.fontSize = "11px", pfd.style.padding = "10px", pfd.style.borderRadius = "30px", pfd.textContent = "ayy lmao", document.body.appendChild(pfd));
 
+// сброс игры
 function resetGame() {
 	ws && (ws.close(), ws = null);
 	snake = null;
@@ -2400,6 +2432,8 @@ var protocol_version = 2,
 	waiting_for_sos = !1,
 	sos_ready_after_mtm = -1;
 
+
+//работа с сокетами
 function connect() {
 	if (0 == sos.length) waiting_for_sos || (waiting_for_sos = !0, sos_ready_after_mtm = -1);
 	else {
@@ -2446,6 +2480,8 @@ function connect() {
 		ws = new WebSocket("ws://" + bso.ip + ":" + bso.po + "/slither");
 		ws.binaryType = "arraybuffer";
 		window.ws = ws;
+
+		// обработка пакетов с сервера
 		ws.onmessage = function(b) {
 			if (ws == this) {
 				b = new Uint8Array(b.data);
@@ -2456,6 +2492,7 @@ function connect() {
 					1E3 < c - lomcpstm && (lomcpstm = c, console.log("omcps: " + omcps + "    frames: " + omfps), omfps = omcps = 0)
 				}
 				if (2 <= b.length) {
+					// обработка пакетов
 					lptm = cptm;
 					cptm = Date.now();
 					var c = b[0] << 8 | b[1],
@@ -2469,9 +2506,11 @@ function connect() {
 						e = b.length - 2,
 						q = b.length - 3;
 					if ("a" == h) connecting = !1, playing = connected = !0, play_btn_click_mtm = -1, grd = b[c] << 16 | b[c + 1] << 8 | b[c + 2], c += 3, e = b[c] << 8 | b[c + 1], c += 2, sector_size = b[c] << 8 | b[c + 1], c += 2, sector_count_along_edge =
+						// обработка пакета Initial setup (init)
 						b[c] << 8 | b[c + 1], c += 2, spangdv = b[c] / 10, c++, nsp1 = (b[c] << 8 | b[c + 1]) / 100, c += 2, nsp2 = (b[c] << 8 | b[c + 1]) / 100, c += 2, nsp3 = (b[c] << 8 | b[c + 1]) / 100, c += 2, mamu = (b[c] << 8 | b[c + 1]) / 1E3, c += 2, mamu2 = (b[c] << 8 | b[c + 1]) / 1E3, c += 2, cst = (b[c] << 8 | b[c + 1]) / 1E3, c += 2, c < f && (protocol_version = b[c]), setMscps(e), lbh.style.display = "inline", lbs.style.display = "inline", lbn.style.display = "inline", lbp.style.display = "inline", lbf.style.display = "inline", vcm.style.display = "inline", loch.style.display = "inline", startShowGame();
 					else if ("e" == h || "E" == h || "3" ==
 						h || "4" == h || "5" == h) {
+						// обработка пакетов Snake rotation (поворот змеи)
 						var t = b[c] << 8 | b[c + 1],
 							c = c + 2,
 							u = -1,
@@ -2507,9 +2546,11 @@ function connect() {
 							} - 1 != I && (f.wang == I && wangnuc++, f.wang = I, f != snake && (f.eang = I)); - 1 != M && (f.sp = M, f.spang = f.sp / spangdv, 1 < f.spang && (f.spang = 1))
 						}
 					} else if ("h" == h) {
+						// обработка пакета Update snake last body part (на сколько я понял это определеет нужно ли обновить длину змеи)
 						if (t = b[c] << 8 | b[c + 1], c += 2, u = (b[c] << 16 | b[c + 1] << 8 | b[c + 2]) / 16777215,
 							f = os["s" + t]) f.fam = u, snl(f)
 					} else if ("r" == h) {
+						// обработка пакета Remove snake part (удаление одной части змеи)
 						if (t = b[c] << 8 | b[c + 1], c += 2, f = os["s" + t]) {
 							4 <= q && (f.fam = (b[c] << 16 | b[c + 1] << 8 | b[c + 2]) / 16777215);
 							for (q = 0; q < f.pts.length; q++)
@@ -2528,6 +2569,7 @@ function connect() {
 							snl(f)
 						}
 					} else if ("g" == h || "n" == h || "G" == h || "N" == h) {
+						// обработка пакетов перемещения змеи и увеличения длины
 						if (playing) {
 							var y = "n" == h || "N" == h,
 								t = b[c] << 8 | b[c + 1],
@@ -2605,6 +2647,7 @@ function connect() {
 							}
 						}
 					} else if ("l" == h) {
+						// обновление таблицы лидеров
 						if (playing) {
 							wumsts = !0;
 							z = E = F = "";
@@ -2645,10 +2688,13 @@ function connect() {
 							lbp.innerHTML = z
 						}
 					} else if ("v" == h) 2 == b[c] ? (want_close_socket = !0, want_victory_message = !1, want_hide_victory = 1, hvfr = 0) : (dead_mtm = Date.now(), play_btn.setEnabled(!0), e = Math.floor(15 * (fpsls[snake.sct] + snake.fam / fmlts[snake.sct] - 1) - 5) / 1, twt.href = "http://twitter.com/intent/tweet?status=" + encodeURIComponent("I got a length of " + e + " in http://slither.io! Can you beat that? #slitherio"),
+						// обработка смерти змеи
 						F = "Your final length was", "de" == lang ? F = "Deine endg\u00fcltige L\u00e4nge war" : "fr" == lang ? F = "Votre longueur finale \u00e9tait de" : "pt" == lang && (F = "Seu comprimento final foi de"), f = "", 1E3 < e && (f = "!"), lastscore.innerHTML = '<span style="opacity: .45;">' + F + " </span><b>" + e + "</b>" + f, e = "Play Again", "fr" == lang ? e = "Jouer" : "pt" == lang && (e = "Joga"), play_btn.setText(String.fromCharCode(160) + e + String.fromCharCode(160)), 1 == b[c] ? (nick_holder.style.display = "none", playh.style.display = "none", smh.style.display = "none", victory_holder.style.display =
 							"inline", saveh.style.display = "block", want_victory_focus = want_victory_message = !0, victory.disabled = !1, save_btn.setEnabled(!0)) : want_close_socket = !0);
 					else if ("W" == h) e = b[c], c++, F = b[c], f = {}, f.xx = e, f.yy = F, sectors.push(f);
+					// подгрузка нового сектора, видимого для клиента
 					else if ("w" == h)
+					// удаление сектора
 						if (8 <= protocol_version ? (f = 2, e = b[c], c++, F = b[c]) : (f = b[c], c++, e = b[c] << 8 | b[c + 1], c += 2, F = b[c] << 8 | b[c + 1]), 1 == f) f = {}, f.xx = e, f.yy = F, sectors.push(f);
 						else {
 							for (y = cm1 = foods_c - 1; 0 <= y; y--) q = foods[y], q.sx == e && q.sy == F && (y == cm1 ? foods[y] = null : (foods[y] = foods[cm1], foods[cm1] = null), foods_c--,
@@ -2656,6 +2702,7 @@ function connect() {
 							for (y = sectors.length - 1; 0 <= y; y--) f = sectors[y], f.xx == e && f.yy == F && sectors.splice(y, 1)
 						}
 					else if ("m" == h) {
+						// обработка пакета Global Highscore
 						K = b[c] << 16 | b[c + 1] << 8 | b[c + 2];
 						c += 3;
 						u = (b[c] << 16 | b[c + 1] << 8 | b[c + 2]) / 16777215;
@@ -2673,7 +2720,9 @@ function connect() {
 						0 < F && (b = "", 0 < e.length && (b += "<span style='font-size:17px;'><b><i><span style='opacity: .5;'>&quot;</span>" + e + "<span style='opacity: .5;'>&quot;</span></i></b></span><BR><div style='height: 5px;'></div>"), 0 < q.length ? (b = 0 < e.length ? b + ("<i><span style='opacity: .5;'>- </span><span style='opacity: .75;'><b>" + q + "</b></span><span style='opacity: .5;'>, today's longest</span></i>") : "<i><span style='opacity: .5;'>Today's longest was </span><span style='opacity: .75;'><b>" + q + "</b></span></i>", b += "<br><i><span style='opacity: .5;'>with a length of </span><span style='opacity: .65;'><b>" +
 							F + "</b></span></i>") : b = 0 < e.length ? b + "<i><span style='opacity: .5;'>- </span><span style='opacity: .5;'>today's longest</span></i>" + ("<br><i><span style='opacity: .5;'>with a length of </span><span style='opacity: .65;'><b>" + F + "</b></span></i>") : b + ("<i><span style='opacity: .5;'>Today's longest: </span><span style='opacity: .75;'><b>" + F + "</b></span></i>"), vcm.innerHTML = b)
 					} else if ("p" == h) wfpr = !1, lagging && (etm *= lag_mult, lagging = !1);
+					// pong)))
 					else if ("u" == h) {
+						// обновление миникарты
 						q = asmc.getContext("2d");
 						q.clearRect(0, 0, 80, 80);
 						q.fillStyle =
@@ -2684,6 +2733,7 @@ function connect() {
 							else
 								for (y = 0; 7 > y && !(0 < (t & u_m[y]) && q.fillRect(e, F, 1, 1), e++, 80 <= e && (e = 0, F++, 80 <= F)); y++);
 					} else if ("s" == h) {
+						// добавление\удаление змеи из поля видимости
 						if (playing)
 							if (t = b[c] << 8 | b[c + 1], c += 2, 6 < q) {
 								z = 2 * (b[c] << 16 | b[c + 1] << 8 | b[c + 2]) * Math.PI / 16777215;
@@ -2734,14 +2784,17 @@ function connect() {
 										break
 									}
 					} else if ("F" == h)
+					// добавление существующей еды в поле зрения
 						if (4 <= protocol_version)
 							for (h = !1; c < f;) y =
 								b[c], c++, e = b[c] << 8 | b[c + 1], c += 2, F = b[c] << 8 | b[c + 1], c += 2, q = b[c] / 5, c++, t = F * grd * 3 + e, q = newFood(t, e, F, q, !0, y), h || (h = !0, u = Math.floor(e / sector_size), E = Math.floor(F / sector_size)), q.sx = u, q.sy = E;
 						else
 							for (u = b[c] << 8 | b[c + 1], c += 2, E = b[c] << 8 | b[c + 1], c += 2; c < f;) t = b[c] << 16 | b[c + 1] << 8 | b[c + 2], c += 3, y = b[c], c++, e = sector_size * (u + b[c] / 255), c++, F = sector_size * (E + b[c] / 255), c++, q = b[c] / 5, c++, q = newFood(t, e, F, q, !0, y), q.sx = u, q.sy = E;
 					else if ("b" == h || "f" == h) 4 <= protocol_version ? (y = b[c], c++, 4 < q && (e = b[c] << 8 | b[c + 1], c += 2, F = b[c] << 8 | b[c + 1], t = F *
+						// спавн еды в зоне видимости
 						grd * 3 + e, q = b[c + 2] / 5, q = newFood(t, e, F, q, "b" == h, y), q.sx = Math.floor(e / sector_size), q.sy = Math.floor(F / sector_size))) : (t = b[c] << 16 | b[c + 1] << 8 | b[c + 2], c += 3, 4 < q && (y = b[c], c++, u = b[c] << 8 | b[c + 1], c += 2, E = b[c] << 8 | b[c + 1], c += 2, e = sector_size * (u + b[c] / 255), c++, F = sector_size * (E + b[c] / 255), c++, q = b[c] / 5, q = newFood(t, e, F, q, "b" == h, y), q.sx = u, q.sy = E));
 					else if ("c" == h) {
+						// обработка поедания еды
 						4 <= protocol_version ? (e = b[c] << 8 | b[c + 1], c += 2, F = b[c] << 8 | b[c + 1], c += 2, t = F * grd * 3 + e) : (t = b[c] << 16 | b[c + 1] << 8 | b[c + 2], c += 3);
 						for (y = cm1 = foods_c - 1; 0 <= y; y--)
 							if (q = foods[y], q.id == t) {
@@ -2752,6 +2805,7 @@ function connect() {
 							}
 						testing && -1 != t && console.log("wtf")
 					} else if ("j" == h) {
+						// перемещение добычи
 						t = b[c] << 8 | b[c + 1];
 						c += 2;
 						e = 1 + 3 * (b[c] << 8 | b[c + 1]);
@@ -2783,22 +2837,23 @@ function connect() {
 							f.ftg = rfc
 						}
 					} else if ("y" == h)
+					// спавн\дестрой добычи
 						if (t = b[c] << 8 | b[c + 1], c += 2, 2 == q)
-							for (y = preys.length - 1; 0 <= y; y--) {
+						for (y = preys.length - 1; 0 <= y; y--) {
+							if (f = preys[y], f.id == t) {
+								preys.splice(y, 1);
+								break
+							}
+						} else if (4 == q)
+							for (b = b[c] << 8 | b[c + 1], y = preys.length - 1; 0 <= y; y--) {
 								if (f = preys[y], f.id == t) {
-									preys.splice(y, 1);
+									f.eaten = !0;
+									f.eaten_by =
+										os["s" + b];
+									f.eaten_by ? f.eaten_fr = 0 : preys.splice(y, 1);
 									break
 								}
-							} else if (4 == q)
-								for (b = b[c] << 8 | b[c + 1], y = preys.length - 1; 0 <= y; y--) {
-									if (f = preys[y], f.id == t) {
-										f.eaten = !0;
-										f.eaten_by =
-											os["s" + b];
-										f.eaten_by ? f.eaten_fr = 0 : preys.splice(y, 1);
-										break
-									}
-								} else y = b[c], c++, e = (b[c] << 16 | b[c + 1] << 8 | b[c + 2]) / 5, c += 3, F = (b[c] << 16 | b[c + 1] << 8 | b[c + 2]) / 5, c += 3, q = b[c] / 5, c++, u = b[c] - 48, c++, I = 2 * (b[c] << 16 | b[c + 1] << 8 | b[c + 2]) * Math.PI / 16777215, c += 3, z = 2 * (b[c] << 16 | b[c + 1] << 8 | b[c + 2]) * Math.PI / 16777215, c += 3, M = (b[c] << 8 | b[c + 1]) / 1E3, newPrey(t, e, F, q, y, u, I, z, M)
+							} else y = b[c], c++, e = (b[c] << 16 | b[c + 1] << 8 | b[c + 2]) / 5, c += 3, F = (b[c] << 16 | b[c + 1] << 8 | b[c + 2]) / 5, c += 3, q = b[c] / 5, c++, u = b[c] - 48, c++, I = 2 * (b[c] << 16 | b[c + 1] << 8 | b[c + 2]) * Math.PI / 16777215, c += 3, z = 2 * (b[c] << 16 | b[c + 1] << 8 | b[c + 2]) * Math.PI / 16777215, c += 3, M = (b[c] << 8 | b[c + 1]) / 1E3, newPrey(t, e, F, q, y, u, I, z, M)
 				}
 			}
 		};
@@ -2854,6 +2909,8 @@ function asciize(b) {
 	}
 	return b
 }
+
+// ссылочки для шаринга и т.д.
 var smh = document.getElementById("smh"),
 	cstx = document.getElementById("cstx");
 cstx.src = "fr" == lang ? "/s/customskins-fr.png" : "pt" == lang ? "/s/customskins-br.png" : "/s/customskins2.png";
@@ -3121,6 +3178,8 @@ document.onkeyup = function(b) {
 	37 == b ? kd_l = !1 : 39 == b ? kd_r = !1 : 38 == b || 32 == b ? (kd_u = !1, setAcceleration(0)) : 16 == b && testing && (shifty = !1)
 };
 
+
+// подключение к серверу
 function loadSos(b) {
 	if (!forcing && 0 < b.length) {
 		sos = [];
