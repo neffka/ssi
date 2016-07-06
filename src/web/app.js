@@ -10,13 +10,18 @@ var path = require('path');
 var hbs = require('hbs');
 var fs = require('fs');
 
+var mongoose = require('mongoose');
+var passport = require('passport');
+var flash = require('connect-flash');
+var session = require('express-session');
+
 var gameClient = null;
 var revision = "88enx";
 
 var app = express();
 
 // view engine setup
-app.setConfigs = function ( configs ) {
+app.setConfigs = function(configs) {
     gameClient = configs;
 };
 app.set('views', path.join(__dirname, 'views'));
@@ -25,9 +30,14 @@ app.set('view engine', 'hbs');
 
 // uncomment after placing your favicon in /public
 app.use(favicon(__dirname + '/public/assets/img/favicon.png'));
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
+
+app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+app.use(flash()); // use connect-flash for flash messages stored in session
 
 // emulating the folder s for graphics (to simplify the work with updates)
 app.use('/s', express.static(path.join(__dirname, 'public/assets/img')));
@@ -35,30 +45,38 @@ app.use('/s', express.static(path.join(__dirname, 'public/assets/img')));
 // view static files
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+app.use(morgan('dev'));
+
+
+var configDB = require('./config/database.js');
+
+mongoose.connect(configDB.url); // connect to our database
+
 // Web Client
-app.get('/', function (req, res, next) {
+app.get('/', function(req, res, next) {
     var dateIp = geoip.lookup(ipaddr.process(req.ip).toString());
     res.render('home', {
         coreConfigs: gameClient.config,
         revision: revision,
         showlayout: true,
-        geo: ( dateIp ? dateIp : {"country":"NONE"} ),
-        title: ''		
+        geo: (dateIp ? dateIp : { "country": "NONE" }),
+        title: ''
     });
 });
 
 // Social box
-app.get('/social-box', function (req, res, next) {
+app.get('/social-box', function(req, res, next) {
     res.render('social-box');
 });
 
 // Ajax
-app.get('/getservers', function (req, res, next) {
-	res.send(JSON.stringify(gameClient.config.gameservers));
+app.get('/getservers', function(req, res, next) {
+    res.send(JSON.stringify(gameClient.config.gameservers));
 });
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
+app.use(function(req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
     next(err);
@@ -69,7 +87,7 @@ app.use(function (req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-    app.use(function (err, req, res, next) {
+    app.use(function(err, req, res, next) {
         res.status(err.status || 500);
         res.render('error', {
             message: err.message,
@@ -80,12 +98,15 @@ if (app.get('env') === 'development') {
 
 // production error handler
 // no stacktraces leaked to user
-app.use(function (err, req, res, next) {
+app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error', {
         message: err.message,
         error: {}
     });
 });
+
+require('./routes.js')(app, passport);
+require('./configs/passport')(passport);
 
 module.exports = app;
