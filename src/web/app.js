@@ -9,6 +9,7 @@ var logger = require('morgan');
 var path = require('path');
 var hbs = require('hbs');
 var fs = require('fs');
+var morgan = require('morgan');
 
 var mongoose = require('mongoose');
 var passport = require('passport');
@@ -19,8 +20,8 @@ var gameClient = null;
 var revision = "88enx";
 
 var app = express();
-
-// view engine setup
+require('../configs/passport')(passport);
+    // view engine setup
 app.setConfigs = function(configs) {
     gameClient = configs;
 };
@@ -49,19 +50,21 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(morgan('dev'));
 
 
-var configDB = require('./config/database.js');
+var configDB = require('../configs/database.js');
 
 mongoose.connect(configDB.url); // connect to our database
 
 // Web Client
 app.get('/', function(req, res, next) {
+    console.log(req.user)
     var dateIp = geoip.lookup(ipaddr.process(req.ip).toString());
     res.render('home', {
         coreConfigs: gameClient.config,
         revision: revision,
         showlayout: true,
         geo: (dateIp ? dateIp : { "country": "NONE" }),
-        title: ''
+        title: '',
+        user: req.user ? req.user.facebook.name : null
     });
 });
 
@@ -74,6 +77,52 @@ app.get('/social-box', function(req, res, next) {
 app.get('/getservers', function(req, res, next) {
     res.send(JSON.stringify(gameClient.config.gameservers));
 });
+
+// =====================================
+// FACEBOOK ROUTES =====================
+// =====================================
+// route for facebook authentication and login
+app.get('/auth/facebook', passport.authenticate('facebook'));
+
+// handle the callback after facebook has authenticated the user
+app.get('/auth/facebook/callback',
+    passport.authenticate('facebook', {
+        successRedirect: '/success',
+        failureRedirect: '/'
+    }));
+
+// =====================================
+// PROFILE SECTION =====================
+// =====================================
+// we will want this protected so you have to be logged in to visit
+// we will use route middleware to verify this (the isLoggedIn function)
+app.get('/profile', isLoggedIn, function(req, res) {
+    res.json({
+        user: req.user // get the user out of session and pass to template
+    });
+});
+
+app.get('/success', isLoggedIn, function(req, res) {
+    res.render('success');
+});
+
+// route for logging out
+app.get('/logout', function(req, res) {
+    req.logout();
+    res.redirect('/');
+});
+
+
+// route middleware to make sure a user is logged in
+function isLoggedIn(req, res, next) {
+
+    // if user is authenticated in the session, carry on
+    if (req.isAuthenticated())
+        return next();
+
+    // if they aren't redirect them to the home page
+    res.redirect('/');
+}
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -89,6 +138,7 @@ app.use(function(req, res, next) {
 if (app.get('env') === 'development') {
     app.use(function(err, req, res, next) {
         res.status(err.status || 500);
+        console.log(err)
         res.render('error', {
             message: err.message,
             error: err
@@ -106,7 +156,7 @@ app.use(function(err, req, res, next) {
     });
 });
 
-require('./routes.js')(app, passport);
-require('./configs/passport')(passport);
+
+//require('./routes.js')(app, passport);
 
 module.exports = app;

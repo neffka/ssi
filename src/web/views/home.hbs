@@ -67,7 +67,7 @@
 
 
  <div id='clq' style='position: fixed; font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif; font-size: 12px; left: 10px; bottom: 10px; width: 260px; height: 20px; text-align: center;'>
-  <a class='lq2' href='https://github.com/PlitherProject/Plither' target='_blank'>GitHub</a>
+  <a class='lq2' href='/auth/facebook' target='_blank'>Login</a>
  </div>
 
 </div>
@@ -91,11 +91,17 @@ localStorage.edttsg = "1";
 
 // Default configs
 var country = '{{geo.country}}';
+var user = '{{user}}';
 var rmsos = [];
 var xhrqs = [];
 var wsu = 0;
 var o = {};
 
+if (user) {
+	document.querySelector('.lq2').setAttribute('href', '/logout');
+	document.querySelector('.lq2').setAttribute('target', '');
+	document.querySelector('.lq2').innerHTML = user;
+};
 if (!window.console) window.console = {};
 if (!window.console.log) window.console.log = function (a) { };
 

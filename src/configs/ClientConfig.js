@@ -4,7 +4,7 @@ module.exports = {
 	"serverUrl": "slither.gq",
 	"gameservers": [
 		{
-			"ip": "127.0.0.1",
+			"ip": "46.101.143.28",
 			"po": 8080
 		}
 	]
