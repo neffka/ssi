@@ -14,9 +14,10 @@
    &nbsp;
   </div>
   
+<div class="nick_play">
   <div style='margin-left: auto; margin-right: auto; text-align: center;'>
    <div class='taho' id='nick_holder' style='width: 244px; margin-top: 34px; background: #4C447c; box-shadow: 0px 6px 50px rgba(0,0,0,1); opacity: 0;'>
-    <input class='sumsginp' id='nick' style='width: 220px; height: 24px;' placeholder="Nickname" maxlength=24></input>
+    <input class='sumsginp nickn' id='nick' style='width: 220px; height: 24px;' placeholder="Nickname" maxlength=24></input>
    </div>
    <div id='victory_holder' style='display: none; font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif; font-size: 18px; color: #FFFFFF; margin-top: 22px;'>
     <div style='font-size: 24px; margin-top: 12px;'><b>You are the new champion!</b></div>
@@ -29,7 +30,7 @@
   
   <div id='playh' style='margin-left: auto; margin-right: auto; text-align: center;'></div>
   <div id='saveh' style='margin-left: auto; margin-right: auto; text-align: center; display: none;'></div>
-  
+ </div>
 </div>
 
 
@@ -101,6 +102,9 @@ if (user) {
 	document.querySelector('.lq2').setAttribute('href', '/logout');
 	document.querySelector('.lq2').setAttribute('target', '');
 	document.querySelector('.lq2').innerHTML = user;
+	document.querySelector('.nickn').value = user;
+} else {
+	document.querySelector('.nick_play').setAttribute('style', 'visibility: hidden;');
 };
 if (!window.console) window.console = {};
 if (!window.console.log) window.console.log = function (a) { };
