@@ -24,9 +24,7 @@ function createContainer() {
 	d.className = 'container-liquid';
 	return d;
 }
-
-
-
+ 
 //domready(() => {
 var container = createContainer();
 var domnode = document.body.appendChild(container);
