@@ -7,7 +7,6 @@ var ipaddr = require('ipaddr.js');
 var express = require('express');
 var logger = require('morgan');
 var path = require('path');
-var hbs = require('hbs');
 var fs = require('fs');
 var morgan = require('morgan');
 
@@ -26,9 +25,6 @@ require('./passport')(passport);
 app.setConfigs = function(configs) {
 	gameClient = configs;
 };
-
-app.set('views', path.join(__dirname, '../web/views'));
-app.set('view engine', 'hbs');
 
 app.use(favicon(__dirname + '/../../public/assets/img/favicon.png'));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -74,11 +70,6 @@ app.get('/currentUser', function(req, res, next) {
 	res.send({
 		user: req.user ? req.user.facebook.name : null
 	});
-});
-
-// Social box
-app.get('/social-box', function(req, res, next) {
-	res.render('social-box');
 });
 
 // Ajax
@@ -140,10 +131,7 @@ if (app.get('env') === 'development') {
 	app.use(function(err, req, res, next) {
 		res.status(err.status || 500);
 		console.log(err)
-		res.render('error', {
-			message: err.message,
-			error: err
-		});
+		res.send('error');
 	});
 }
 
@@ -151,10 +139,7 @@ if (app.get('env') === 'development') {
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
 	res.status(err.status || 500);
-	res.render('error', {
-		message: err.message,
-		error: {}
-	});
+	res.send('error');
 });
 
 
