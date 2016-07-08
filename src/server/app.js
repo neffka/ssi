@@ -51,7 +51,6 @@ mongoose.connect(configDB.url); // connect to our database
 
 // Web Client
 app.get('/', function(req, res, next) {
-	console.log(req.user)
 		/*	var dateIp = geoip.lookup(ipaddr.process(req.ip).toString());
 			res.render('home', {
 				coreConfigs: gameClient.config,
@@ -66,9 +65,10 @@ app.get('/', function(req, res, next) {
 });
 
 app.get('/currentUser', function(req, res, next) {
-	console.log(req.user)
+	var dateIp = geoip.lookup(ipaddr.process(req.ip).toString());
 	res.send({
-		user: req.user ? req.user.facebook.name : null
+		user: req.user ? req.user.facebook.name : null,
+		geo: dateIp ? dateIp : { "country": "NONE" }
 	});
 });
 

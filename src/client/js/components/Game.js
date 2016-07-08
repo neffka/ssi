@@ -18,6 +18,7 @@ export default class Game extends React.Component {
 			type: 'GET',
 			url: '/currentUser'
 		}).success(res => {
+			console.log(res.geo);
 			if (res.user) {
 				this.setState({
 					user: res.user,
