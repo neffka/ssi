@@ -93,7 +93,8 @@ app.get('/callback', isLoggedIn, function(req, res) {
 			referal: req.user.facebook.id
 		});
 	}
-	res.sendFile(path.resolve(__dirname, '../client/views/callback.htm'));
+	res.redirect('/');
+	//res.sendFile(path.resolve(__dirname, '../client/views/callback.htm'));
 });
 
 // route for logging out
@@ -129,7 +130,7 @@ if (app.get('env') === 'development') {
 	app.use(function(err, req, res, next) {
 		res.status(err.status || 500);
 		console.log(err)
-		res.send('error');
+		res.end();
 	});
 }
 
@@ -137,7 +138,7 @@ if (app.get('env') === 'development') {
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
 	res.status(err.status || 500);
-	res.send('error');
+	res.end();
 });
 
 
