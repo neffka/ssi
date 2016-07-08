@@ -12,7 +12,7 @@ module.exports = {
 		facebook: {
 			'clientID': '867585170013996',
 			'clientSecret': 'd3168b7596739868dcc6f93c79e33f9d',
-			'callbackURL': 'http://localhost:8000/auth/facebook/callback' //'http://megaslither.io/auth/facebook/callback'
+			'callbackURL': 'http://megaslither.io/auth/facebook/callback' //'http://megaslither.io/auth/facebook/callback'
 		}
 	},
 	db: {
