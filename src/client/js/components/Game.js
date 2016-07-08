@@ -9,6 +9,8 @@ export default class Game extends React.Component {
 			target: '_blank',
 			visibility: 'hidden',
 			button: 'Login',
+			referal: false,
+			parent: false,
 			onChange: () => {}
 		};
 	}
@@ -18,14 +20,15 @@ export default class Game extends React.Component {
 			type: 'GET',
 			url: '/currentUser'
 		}).success(res => {
-			console.log(res.geo);
 			if (res.user) {
 				this.setState({
 					user: res.user,
 					loginHref: '/logout',
 					target: '',
 					visibility: 'visible',
-					button: res.user
+					button: res.user,
+					referal: res.userId,
+					parent: res.parent
 				});
 			};
 		});
@@ -63,16 +66,22 @@ export default class Game extends React.Component {
 					<div id='saveh' style={{visibility: this.state.visibility, marginLeft: 'auto', marginRight: 'auto', textAlign: 'center', display: 'none'}}></div>
 				</div>
 				<div id='smh' style={{opacity: 0, position: 'fixed', left: 0 + 'px', top: 0 + 'px', zIndex: 21}}>
-					<img id='cstx' className='nsi'  draggable='false' width='225' height='36' src='/assets/img/customskins2.png' style={{position: 'fixed', bottom: 30 + 'px', opacity: .4, zIndex: 50, display: 'none'}}></img>
-				
-					<div id='fbh' style={{position: 'fixed', bottom: 20 + 'px', zIndex: 50}}>
-						<a className='btn btnt' draggable="false" id='fb' style={{width: 80 + 'px', height: 74 + 'px'}} href='#'>
+					<img id='cstx' className='nsi'  draggable='false' width='225' height='36' src='/assets/img/customskins2.png' style={{visibility: this.state.visibility, position: 'fixed', bottom: 30 + 'px', opacity: .4, zIndex: 50, display: 'none'}}></img>
+
+					<div id='vkh' style={{visibility: this.state.visibility, position: 'fixed', bottom: 20 + 'px', zIndex: 50}}>
+						<a className='btn btnt' draggable="false" id='vk' style={{width: 80 + 'px', height: 74 + 'px'}} href={"http://vk.com/share.php?url=" + encodeURIComponent("http://megaslither.io/?ref=" + this.state.referal)}>
 							<img className='nsi'  draggable='false' width='80' height='74' src='/assets/img/facebook.png'></img>
 						</a>
 					</div>
 				
-					<div id='twth' style={{position: 'fixed', bottom: 20 + 'px', zIndex: 50}}>
-						<a className='btn btnt' draggable="false" id='twt' style={{width:80 + 'px', height:74 + 'px'}} href='#'>
+					<div id='fbh' style={{visibility: this.state.visibility, position: 'fixed', bottom: 20 + 'px', zIndex: 50}}>
+						<a className='btn btnt' draggable="false" id='fb' style={{width: 80 + 'px', height: 74 + 'px'}} href={"https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent("http://megaslither.io/?ref=" + this.state.referal)}>
+							<img className='nsi'  draggable='false' width='80' height='74' src='/assets/img/facebook.png'></img>
+						</a>
+					</div>
+				
+					<div id='twth' style={{visibility: this.state.visibility, position: 'fixed', bottom: 20 + 'px', zIndex: 50}}>
+						<a className='btn btnt' draggable="false" id='twt' style={{width:80 + 'px', height:74 + 'px'}} href={'http://twitter.com/intent/tweet?status=' + encodeURIComponent("Come and play http://megaslither.io/?ref=" + this.state.referal + " #megaslitherio")}>
 							<img className='nsi'  draggable='false' width='80' height='74' src='/assets/img/twitter.png'></img>
 						</a>
 					</div>
@@ -93,7 +102,7 @@ export default class Game extends React.Component {
 					<div id='plq' style={{position: 'fixed', fontFamily: ["Lucida Sans Unicode", "Lucida Grande", 'sans-serif'], fontSize: 13 + 'px', color: '#408040', right: 10 + 'px', top: 10 + 'px', width: 260 + 'px', height: 400 + 'px', textAlign: 'right'}}>&nbsp;</div>
 
 					<div id='clq' style={{position: 'fixed', fontFamily: ["Lucida Sans Unicode", "Lucida Grande", 'sans-serif'], fontSize: 12 + 'px', left: 10 + 'px', bottom: 10 + 'px', width: 260 + 'px', height: 20 + 'px', textAlign: 'center'}}>
-						<a className='lq2' href={this.state.loginHref} target={this.state.target}>{this.state.button}</a>
+						<a className='lq2' href={this.state.loginHref} target={this.state.target}>{this.state.button}</a> {this.state.parent ? 'Parent:' + this.state.parent : null}
 					</div>
 
 				</div>

@@ -15,6 +15,8 @@ var passport = require('passport');
 var flash = require('connect-flash');
 var session = require('express-session');
 
+var referalService = require('./services/referalService');
+
 var gameClient = null;
 var revision = "88enx";
 
@@ -49,18 +51,10 @@ var configDB = require('../../config').db;
 
 mongoose.connect(configDB.url); // connect to our database
 
-// Web Client
 app.get('/', function(req, res, next) {
-		/*	var dateIp = geoip.lookup(ipaddr.process(req.ip).toString());
-			res.render('home', {
-				coreConfigs: gameClient.config,
-				revision: revision,
-				showlayout: true,
-				geo: (dateIp ? dateIp : { "country": "NONE" }),
-				title: '',
-				user: req.user ? req.user.facebook.name : null
-			});
-		*/
+	if (req.query.ref) {
+		res.cookie('refId', req.query.ref, { maxAge: 900000, httpOnly: true });
+	};
 	res.sendFile(path.resolve(__dirname, '../client/views/index.htm'));
 });
 
@@ -68,6 +62,8 @@ app.get('/currentUser', function(req, res, next) {
 	var dateIp = geoip.lookup(ipaddr.process(req.ip).toString());
 	res.send({
 		user: req.user ? req.user.facebook.name : null,
+		userId: req.user ? req.user.facebook.id : null,
+		parent: req.user ? req.user.parent : null,
 		geo: dateIp ? dateIp : { "country": "NONE" }
 	});
 });
@@ -87,15 +83,17 @@ app.get('/auth/facebook', passport.authenticate('facebook'));
 app.get('/auth/facebook/callback',
 	passport.authenticate('facebook', {
 		successRedirect: '/callback',
-		failureRedirect: '/error'
+		failureRedirect: '/'
 	}));
 
 app.get('/callback', isLoggedIn, function(req, res) {
+	if (req.user && !req.user.parent && req.cookies.refId) {
+		referalService.setParent({
+			parent: req.cookies.refId,
+			referal: req.user.facebook.id
+		});
+	}
 	res.sendFile(path.resolve(__dirname, '../client/views/callback.htm'));
-});
-
-app.get('/error', isLoggedIn, function(req, res) {
-	res.send('error');
 });
 
 // route for logging out
