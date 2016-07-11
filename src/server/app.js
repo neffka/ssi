@@ -88,16 +88,22 @@ app.get('/auth/facebook/callback',
 	}));
 
 app.get('/callback', isLoggedIn, function(req, res) {
-	if (req.user && !req.user.parent && req.cookies.refId) {
-		referalService.setParent({
-			parent: req.cookies.refId,
-			referal: req.user.facebook.id
-		});
-		logger.info(`${req.user.facebook.id} log in with ip ${ipaddr.process(req.ip).toString()}`);
-	} else {
-		logger.warn(`${req.user.facebook.id} log in error with ip ${ipaddr.process(req.ip).toString()}`);
+	try {
+		if (req.user) {
+			logger.info(`${req.user.facebook.id} log in with ip ${ipaddr.process(req.ip).toString()}`);
+			if (!req.user.parent && req.cookies.refId) {
+				referalService.setParent({
+					parent: req.cookies.refId,
+					referal: req.user.facebook.id
+				});
+			}
+		} else {
+			logger.warn(`${req.user.facebook.id} log in error with ip ${ipaddr.process(req.ip).toString()}`);
+		}
+		res.redirect('/');
+	} catch (e) {
+		console.log('error: ' + e.stack);
 	}
-	res.redirect('/');
 });
 
 // route for logging out
