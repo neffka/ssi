@@ -24,6 +24,7 @@
     "gulp-nodemon": "^2.1.0",
     "hbs": "^2.9.0",
     "ipaddr.js": "latest",
+    "log4js": "^0.6.37",
     "method-override": "~1.0.0",
     "mongoose": "~3.8.1",
     "morgan": "^1.5.3",

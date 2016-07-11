@@ -14,6 +14,7 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 var flash = require('connect-flash');
 var session = require('express-session');
+var logger = require('./utils/logger.js').getLogger('users');
 
 var referalService = require('./services/referalService');
 
@@ -92,13 +93,16 @@ app.get('/callback', isLoggedIn, function(req, res) {
 			parent: req.cookies.refId,
 			referal: req.user.facebook.id
 		});
+		logger.info(`${req.user.facebook.id} log in with ip ${ipaddr.process(req.ip).toString()}`);
+	} else {
+		logger.warn(`${req.user.facebook.id} log in error with ip ${ipaddr.process(req.ip).toString()}`);
 	}
 	res.redirect('/');
-	//res.sendFile(path.resolve(__dirname, '../client/views/callback.htm'));
 });
 
 // route for logging out
 app.get('/logout', function(req, res) {
+	logger.info(`${req.user.facebook.id} log out with ip ${ipaddr.process(req.ip).toString()}`);
 	req.logout();
 	res.redirect('/');
 });
