@@ -3,6 +3,7 @@ var log4js = require('log4js'),
 
 log4js.loadAppender('file');
 log4js.addAppender(log4js.appenders.file(path.resolve(__dirname, '../../../logs/users.log'), 'users'));
+log4js.addAppender(log4js.appenders.file(path.resolve(__dirname, '../../../logs/server.log'), 'server'));
 
 logger.setLevel('INFO');
 
