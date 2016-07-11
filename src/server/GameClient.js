@@ -1,6 +1,7 @@
 // Imports
 var WebApp = require('./app');
 var http = require('http');
+var monitor = require('node-monitor');
 
 // GameClient implementation
 function GameClient(travisCompile) {
@@ -21,6 +22,10 @@ GameClient.prototype.start = function() {
 	this.webServer.listen(this.config.serverPort);
 	this.webServer.on('error', onError.bind(this));
 	this.webServer.on('listening', onListening.bind(this));
+
+	monitor.Monitor(this.webServer, {
+		'collect_all': 'yes'
+	});
 
 	// functions
 	function onError(error) {

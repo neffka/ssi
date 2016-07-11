@@ -429,9 +429,9 @@ function loginFade() {
 	llgmtm = b;
 	login_fr += .05 * f;
 	choosing_skin && (login_fr += .06 * f);
-	1 <= login_fr ? (login_fr = 1, login.style.display = "none", cstx.style.display = "none", vkh.style.display = "none", fbh.style.display = "none", twth.style.display = "none", cskh.style.display = "none", grqh.style.display = "none", plq.style.display = "none", clq.style.display = "none", social.style.display = "none", login.style.opacity = 1, cstx.style.opacity = 1, fbh.style.opacity = 1, vkh.style.opacity = 1, twth.style.opacity = 1, cskh.style.opacity = 1, grqh.style.opacity = 1, plq.style.opacity =
+	1 <= login_fr ? (login_fr = 1, login.style.display = "none", cstx.style.display = "none", shh.style.display = "none", vkh.style.display = "none", fbh.style.display = "none", twth.style.display = "none", cskh.style.display = "none", grqh.style.display = "none", plq.style.display = "none", clq.style.display = "none", social.style.display = "none", login.style.opacity = 1, cstx.style.opacity = 1, fbh.style.opacity = 1, vkh.style.opacity = 1, twth.style.opacity = 1, cskh.style.opacity = 1, grqh.style.opacity = 1, plq.style.opacity =
 		1, clq.style.opacity = 1, social.style.opacity = 1, pskh.style.opacity = 1, nskh.style.opacity = 1, skodiv.style.opacity = 1, tip_fr = -1, tips.style.display = "none", mc.style.opacity = 1, loch.style.opacity = 1, clearInterval(login_iv), login_iv = -1, -1 != showlogo_iv && (ncka = lgss = lga = 1, showLogo(!0), -1 != showlogo_iv && (clearInterval(showlogo_iv), showlogo_iv = -1))) : (lgcsc = 1 + .1 * Math.pow(login_fr, 2), b = Math.round(lgbsc * lgcsc * 1E5) / 1E5, trf(login, "scale(" + b + "," + b + ")"), login.style.opacity = 1 - login_fr, cstx.style.opacity = 1 - login_fr, fbh.style.opacity =
-		1 - login_fr, twth.style.opacity = 1 - login_fr, vkh.style.opacity = 1 - login_fr, cskh.style.opacity = 1 - login_fr, grqh.style.opacity = 1 - login_fr, plq.style.opacity = 1 - login_fr, clq.style.opacity = 1 - login_fr, social.style.opacity = 1 - login_fr, pskh.style.opacity = login_fr, nskh.style.opacity = login_fr, skodiv.style.opacity = login_fr, mc.style.opacity = login_fr, loch.style.opacity = login_fr)
+		1 - login_fr, twth.style.opacity = 1 - login_fr, shh.style.opacity = 1 - login_fr, vkh.style.opacity = 1 - login_fr, cskh.style.opacity = 1 - login_fr, grqh.style.opacity = 1 - login_fr, plq.style.opacity = 1 - login_fr, clq.style.opacity = 1 - login_fr, social.style.opacity = 1 - login_fr, pskh.style.opacity = login_fr, nskh.style.opacity = login_fr, skodiv.style.opacity = login_fr, mc.style.opacity = login_fr, loch.style.opacity = login_fr)
 }
 var play_count = 0,
 	want_play = !1,
@@ -1729,6 +1729,7 @@ for (var oef = function() {
 				try { "1" != localStorage.edttsg ? cstx.style.display = "inline" : cskh.style.display = "inline" } catch (w) {}
 				fbh.style.display = "inline";
 				vkh.style.display = "inline";
+				shh.style.display = "inline";
 				twth.style.display = "inline";
 				plq.style.display = "inline";
 				clq.style.display = "inline";
@@ -1736,7 +1737,7 @@ for (var oef = function() {
 				social.style.display = "inline";
 				want_victory_focus && (want_victory_focus = !1, victory.focus())
 			} - 2 == login_iv && (login_fr -= .004 * vfr, choosing_skin && (login_fr -= .007 * vfr), lb_fr = login_fr, 0 >= login_fr && (login_fr = 0, dead_mtm = -1, nick.disabled = !1, nick.focus(), lb_fr = -1, playing = !1, choosing_skin &&
-					(choosing_skin = !1, resetGame(), pskh.style.display = "none", nskh.style.display = "none", skodiv.style.display = "none")), pbdiv.style.opacity = 1 - .5 * Math.max(0, Math.min(1, 6 * login_fr)), lgcsc = 1 + .1 * Math.pow(login_fr, 2), q = Math.round(lgbsc * lgcsc * 1E5) / 1E5, 1 == q ? trf(login, "") : trf(login, "scale(" + q + "," + q + ")"), login.style.opacity = 1 - login_fr, cstx.style.opacity = 1 - login_fr, vkh.style.opacity = 1 - login_fr, fbh.style.opacity = 1 - login_fr, twth.style.opacity = 1 - login_fr, cskh.style.opacity = 1 - login_fr, grqh.style.opacity = 1 - login_fr, plq.style.opacity = 1 - login_fr, clq.style.opacity =
+					(choosing_skin = !1, resetGame(), pskh.style.display = "none", nskh.style.display = "none", skodiv.style.display = "none")), pbdiv.style.opacity = 1 - .5 * Math.max(0, Math.min(1, 6 * login_fr)), lgcsc = 1 + .1 * Math.pow(login_fr, 2), q = Math.round(lgbsc * lgcsc * 1E5) / 1E5, 1 == q ? trf(login, "") : trf(login, "scale(" + q + "," + q + ")"), login.style.opacity = 1 - login_fr, cstx.style.opacity = 1 - login_fr, shh.style.opacity = 1 - login_fr, vkh.style.opacity = 1 - login_fr, fbh.style.opacity = 1 - login_fr, twth.style.opacity = 1 - login_fr, cskh.style.opacity = 1 - login_fr, grqh.style.opacity = 1 - login_fr, plq.style.opacity = 1 - login_fr, clq.style.opacity =
 				1 - login_fr, social.style.opacity = 1 - login_fr, pskh.style.opacity = login_fr, nskh.style.opacity = login_fr, skodiv.style.opacity = login_fr, mc.style.opacity = login_fr, loch.style.opacity = login_fr, lbh.style.opacity = .85 * lb_fr, lbs.style.opacity = lbn.style.opacity = lbp.style.opacity = lbf.style.opacity = vcm.style.opacity = lb_fr)
 		}
 		want_close_socket && -1 == dead_mtm && (want_close_socket = !1, ws && (ws.close(), ws = null, playing = connected = !1), resetGame());
@@ -2305,6 +2306,7 @@ function resize() {
 		login.style.width = ww + "px";
 		fbh.style.right = 30 + wsu + "px";
 		vkh.style.right = 230 + wsu + "px";
+		shh.style.right = 330 + wsu + "px";
 		twth.style.right = 130 + wsu + "px";
 		cstx.style.right = 240 + wsu + "px";
 		grqh.style.right = 20 + wsu + "px";
@@ -2928,8 +2930,11 @@ fb.onclick = function() { localStorage.edttsg = "1" };
 vk.onclick = function() { localStorage.edttsg = "1" };
 var fbh = document.getElementById("fbh"),
 	twt = document.getElementById("twt"),
+	shh = document.getElementById("shh"),
+	sh = document.getElementById("sh"),
 	vkh = document.getElementById("vkh");
 twt.onclick = function() { localStorage.edttsg = "1" };
+sh.onclick = function() { localStorage.edttsg = "1" };
 //twt.href = "http://twitter.com/intent/tweet?status=" + encodeURIComponent("Come and play http://slither.io #slitherio");
 var twth = document.getElementById("twth"),
 	csk = document.getElementById("csk"),

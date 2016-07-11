@@ -59,7 +59,7 @@ export default class Game extends React.Component {
 				<div id='smh' style={{opacity: 0, position: 'fixed', left: 0 + 'px', top: 0 + 'px', zIndex: 21}}>
 					<img id='cstx' className='nsi'  draggable='false' width='225' height='36' src='/assets/img/customskins2.png' style={{visibility: 'hidden', position: 'fixed', bottom: 30 + 'px', opacity: .4, zIndex: 50, display: 'none'}}></img>
 
-					<SocialBox visibility={this.state.visibility} referal={this.state.referal} />
+					<SocialBox referal={this.state.referal} />
 					
 					<div id='cskh' style={{position: 'fixed', left: 20 + 'px', bottom: 16 + 'px', zIndex: 50, display: 'none'}}>
 						<a className='btn btnt' draggable="false" id='csk' style={{width: 95 + 'px', height: 89 + 'px'}} href='#'>
