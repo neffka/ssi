@@ -11,12 +11,14 @@ var fs = require('fs');
 var morgan = require('morgan');
 
 var mongoose = require('mongoose');
+var mongodb = require('mongodb').MongoClient;
 var passport = require('passport');
 var flash = require('connect-flash');
 var session = require('express-session');
 var logger = require('./utils/logger.js').getLogger('users');
 
 var referalService = require('./services/referalService');
+var apiService;
 
 var gameClient = null;
 var revision = "88enx";
@@ -50,13 +52,26 @@ app.use(morgan('dev'));
 
 var configDB = require('../../config').db;
 
-mongoose.connect(configDB.url); // connect to our database
+//mongoose.connect(configDB.url); // connect to our database
+
+var connect = function() {
+	mongodb.connect(configDB.url, function(err, db) {
+		if (err) {
+			console.log(err);
+			setTimeout(connect, 1000);
+		} else {
+			apiService = (new require('./services/apiService'))(db);
+		};
+	})
+};
+
+connect();
 
 app.get('/', function(req, res, next) {
 	if (req.query.ref) {
 		res.cookie('refId', req.query.ref, { maxAge: 900000, httpOnly: true });
 	};
-	res.sendFile(path.resolve(__dirname, '../client/views/index.htm'));
+	res.sendFile(path.resolve(__dirname, '../client/views/index.html'));
 });
 
 app.get('/currentUser', function(req, res, next) {
@@ -113,6 +128,54 @@ app.get('/logout', function(req, res) {
 	res.redirect('/');
 });
 
+
+app.post('/api/db/auth', function(req, res) {
+	apiService.checkUser(req.body).then(function() {
+		res.send();
+	});
+});
+
+app.post('/api/db/start/session', function(req, res) {
+	apiService.startSession(req.body).then(function(data) {
+		res.send(data);
+	});
+});
+
+app.post('/api/db/start/game', function(req, res) {
+	apiService.startGame(req.body).then(function(data) {
+		res.send(data);
+	});
+});
+
+app.post('/api/db/end/session', function(req, res) {
+	apiService.endSession(req.body).then(function() {
+		res.send();
+	});
+});
+
+app.post('/api/db/end/game', function(req, res) {
+	apiService.endGame(req.body).then(function() {
+		res.send();
+	});
+});
+
+app.post('/api/db/update/snake', function(req, res) {
+	apiService.updateSnake(req.body).then(function() {
+		res.send();
+	});
+});
+
+app.post('/api/db/update/leaderboard', function(req, res) {
+	apiService.updateLeaderboard(req.body).then(function() {
+		res.send();
+	});
+});
+
+app.post('/api/db/insert/kill', function(req, res) {
+	apiService.addKill(req.body).then(function() {
+		res.send();
+	});
+});
 
 // route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {

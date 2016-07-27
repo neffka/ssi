@@ -1050,6 +1050,7 @@ function setSkin(b, f) {
 
 //новая змея
 function newSnake(b, f, c, h, u, q) {
+	console.log(b, f, c, h, u, q)
 	var e = {};
 	e.id = b;
 	e.xx = f;
@@ -2486,11 +2487,13 @@ function connect() {
 		}
 		testing && (q = "", null != c && (q = "(fbso!)"), console.log("connecting to " + bso.ip + ":" + bso.po + "... " + q));
 		ws = new WebSocket("ws://" + bso.ip + ":" + bso.po + "/slither");
+		console.log(ws)
 		ws.binaryType = "arraybuffer";
 		window.ws = ws;
 
 		// обработка пакетов с сервера
 		ws.onmessage = function(b) {
+//			console.log(foods)
 			if (ws == this) {
 				b = new Uint8Array(b.data);
 				rdps += b.length;
@@ -2750,6 +2753,7 @@ function connect() {
 								I = 2 * (b[c] << 16 | b[c + 1] << 8 | b[c + 2]) * Math.PI / 16777215;
 								c += 3;
 								M = (b[c] << 8 | b[c + 1]) / 1E3;
+								console.log(M)
 								c += 2;
 								u = (b[c] << 16 | b[c + 1] << 8 | b[c + 2]) / 16777215;
 								c += 3;
@@ -2793,9 +2797,9 @@ function connect() {
 									}
 					} else if ("F" == h)
 					// добавление существующей еды в поле зрения
-						if (4 <= protocol_version)
-							for (h = !1; c < f;) y =
-								b[c], c++, e = b[c] << 8 | b[c + 1], c += 2, F = b[c] << 8 | b[c + 1], c += 2, q = b[c] / 5, c++, t = F * grd * 3 + e, q = newFood(t, e, F, q, !0, y), h || (h = !0, u = Math.floor(e / sector_size), E = Math.floor(F / sector_size)), q.sx = u, q.sy = E;
+						if (4 <= protocol_version) {
+							for (h = !1; c < f;) y = b[c], c++, e = b[c] << 8 | b[c + 1], c += 2, F = b[c] << 8 | b[c + 1], c += 2, q = b[c] / 5, c++, t = F * grd * 3 + e, q = newFood(t, e, F, q, !0, y), h || (h = !0, u = Math.floor(e / sector_size), E = Math.floor(F / sector_size)), q.sx = u, q.sy = E;
+						}
 						else
 							for (u = b[c] << 8 | b[c + 1], c += 2, E = b[c] << 8 | b[c + 1], c += 2; c < f;) t = b[c] << 16 | b[c + 1] << 8 | b[c + 2], c += 3, y = b[c], c++, e = sector_size * (u + b[c] / 255), c++, F = sector_size * (E + b[c] / 255), c++, q = b[c] / 5, c++, q = newFood(t, e, F, q, !0, y), q.sx = u, q.sy = E;
 					else if ("b" == h || "f" == h) 4 <= protocol_version ? (y = b[c], c++, 4 < q && (e = b[c] << 8 | b[c + 1], c += 2, F = b[c] << 8 | b[c + 1], t = F *
