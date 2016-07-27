@@ -71,7 +71,7 @@ app.get('/', function(req, res, next) {
 	if (req.query.ref) {
 		res.cookie('refId', req.query.ref, { maxAge: 900000, httpOnly: true });
 	};
-	res.sendFile(path.resolve(__dirname, '../client/views/index.html'));
+	res.sendFile(path.resolve(__dirname, '../client/views/index.htm'));
 });
 
 app.get('/currentUser', function(req, res, next) {
