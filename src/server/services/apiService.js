@@ -165,6 +165,7 @@ var apiService = (function() {
 			});
 		},
 		addKill: function(args) {
+			console.log(args)
 			var $ = this,
 				args = args || {};
 			return new Promise(function(resolve, reject) {
@@ -172,6 +173,8 @@ var apiService = (function() {
 					date: (new Date()).getTime(),
 					killer: args.killer,
 					victim: args.victim
+				}).then(function() {
+					resolve();
 				});
 			});
 		}

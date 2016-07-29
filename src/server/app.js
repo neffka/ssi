@@ -188,6 +188,8 @@ app.post('/api/db/update/leaderboard', function(req, res) {
 app.post('/api/db/insert/kill', function(req, res) {
 	apiService.addKill(req.body).then(function() {
 		res.send();
+	}).catch(function(err) {
+		res.send(err);
 	});
 });
 
