@@ -2,11 +2,13 @@ var math = require('../utils/math');
 
 var apiService = (function() {
 	var $ = function(db) {
-		console.log(db)
 		this.db = db;
-		this.users = this.db.collection('botUsers');
-		this.world = this.db.collection('world');
-		this.kills = this.db.collection('kills');
+		if (this.db) {
+			this.users = this.db.collection('botUsers');
+			this.world = this.db.collection('world');
+			this.kills = this.db.collection('kills');
+		};
+		return this;
 	};
 
 	$.prototype = {
@@ -16,11 +18,11 @@ var apiService = (function() {
 			return new Promise(function(resolve, reject) {
 				$.users.findOne({
 					'facebook.id': args.id || 0
-				}).toArray(function(err, data) {
+				}, function(err, data) {
 					if (err) {
 						reject(err);
 					} else {
-						if (data.length) {
+						if (data) {
 							resolve(data)
 						} else {
 							$.users.insert({

@@ -9,6 +9,7 @@ var logger = require('morgan');
 var path = require('path');
 var fs = require('fs');
 var morgan = require('morgan');
+var cors = require('cors');
 
 var mongoose = require('mongoose');
 var mongodb = require('mongodb').MongoClient;
@@ -32,7 +33,7 @@ app.setConfigs = function(configs) {
 };
 
 app.use(favicon(__dirname + '/../../public/assets/img/favicon.png'));
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
@@ -48,30 +49,34 @@ app.use('/s', express.static(path.join(__dirname, '../../public/assets/img')));
 app.use(express.static(path.join(__dirname, '../../public')));
 
 
-app.use(morgan('dev'));
+//app.use(morgan('dev'));
 
+app.use(function(req, res, next) {
+	res.header('Access-Control-Allow-Origin', '*');
+	res.header('Access-Control-Allow-Methods', '*');
+	res.header('Access-Control-Allow-Headers', '*');
+	next();
+});
+
+app.use(cors());
 var configDB = require('../../config').db;
 
 //mongoose.connect(configDB.url); // connect to our database
 
-var connect = function() {
-	mongodb.connect(configDB.url, function(err, db) {
-		if (err) {
-			console.log(err);
-			setTimeout(connect, 1000);
-		} else {
-			apiService = (new require('./services/apiService'))(db);
-		};
-	})
-};
-
-connect();
+mongodb.connect(configDB.url, function(err, db) {
+	if (err) {
+		console.log(err);
+		setTimeout(connect, 1000);
+	} else {
+		apiService = new(require('./services/apiService'))(db);
+	};
+})
 
 app.get('/', function(req, res, next) {
 	if (req.query.ref) {
 		res.cookie('refId', req.query.ref, { maxAge: 900000, httpOnly: true });
 	};
-	res.sendFile(path.resolve(__dirname, '../client/views/index.html'));
+	res.sendFile(path.resolve(__dirname, '../client/views/index.htm'));
 });
 
 app.get('/currentUser', function(req, res, next) {
@@ -130,14 +135,23 @@ app.get('/logout', function(req, res) {
 
 
 app.post('/api/db/auth', function(req, res) {
-	apiService.checkUser(req.body).then(function() {
-		res.send();
+	console.log(req.body)
+	apiService.checkUser(req.body).then(function(data) {
+		console.log(data)
+		res.send(data);
+	}).catch(function(err) {
+		console.log(err);
+		res.end(err);
 	});
 });
 
 app.post('/api/db/start/session', function(req, res) {
 	apiService.startSession(req.body).then(function(data) {
+		console.log(data)
 		res.send(data);
+	}).catch(function(err) {
+		console.log(err);
+		res.end(err);
 	});
 });
 

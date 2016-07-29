@@ -3214,6 +3214,7 @@ function loadSos(b) {
 					for (h = C = 0; h < x.length; h++) C *= 256, C += x[h];
 					c.ip = w.join(".");
 					c.po = u;
+					console.log(c.ip + ':' + c.po)
 					c.ac = C;
 					c.wg = C + 5;
 					c.clu = D[0];
