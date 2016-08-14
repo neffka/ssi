@@ -44,7 +44,6 @@ var configDB = require('../../config').db;
 mongodb.connect(configDB.url, function(err, db) {
 	if (err) {
 		console.log(err);
-		setTimeout(connect, 1000);
 	} else {
 		apiService = new(require('./services/apiService'))(db);
 	};
